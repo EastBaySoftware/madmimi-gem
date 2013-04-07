@@ -31,6 +31,7 @@ require 'net/http'
 require 'net/https'
 require 'crack'
 require 'csv'
+require 'nokogiri'
 
 class MadMimi
 
@@ -93,6 +94,10 @@ class MadMimi
 
   def csv_import(csv_string)
     do_request(AUDIENCE_MEMBERS_PATH, :post, :csv_file => csv_string)
+  end
+
+  def audience_members
+    do_request(AUDIENCE_MEMBERS_PATH, :get, raw: true, format: 'json')
   end
 
   def add_user(options)
