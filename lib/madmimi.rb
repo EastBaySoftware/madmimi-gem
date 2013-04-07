@@ -97,7 +97,8 @@ class MadMimi
   end
 
   def audience_members
-    do_request(AUDIENCE_MEMBERS_PATH, :get, raw: true, format: 'json')
+    json = do_request(AUDIENCE_MEMBERS_PATH, :get, raw: true, format: 'json')
+    ActiveSupport::JSON.decode(json)
   end
 
   def add_user(options)
