@@ -96,8 +96,8 @@ class MadMimi
     do_request(AUDIENCE_MEMBERS_PATH, :post, :csv_file => csv_string)
   end
 
-  def audience_members
-    json = do_request(AUDIENCE_MEMBERS_PATH, :get, raw: true, format: 'json')
+  def audience_members(page = nil)
+    json = do_request(AUDIENCE_MEMBERS_PATH, :get, raw: true, format: 'json', page: page)
     ActiveSupport::JSON.decode(json)
   end
 
