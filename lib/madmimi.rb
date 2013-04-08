@@ -46,6 +46,7 @@ class MadMimi
   SUPPRESSED_SINCE_PATH = '/audience_members/suppressed_since/%timestamp%.txt'
   SUPPRESS_USER_PATH = ' /audience_members/%email%/suppress_email'
   SEARCH_PATH = '/audience_members/search.xml'
+  IS_SUPPRESSED_PATH = '/audience_members/%email%/is_suppressed'
   
   PROMOTIONS_PATH = '/promotions.xml'
   PROMOTION_SAVE_PATH = '/promotions/save'
@@ -120,6 +121,11 @@ class MadMimi
   
   def suppress_email(email)
     do_request(SUPPRESS_USER_PATH.gsub('%email%', email), :post)
+  end
+
+  def is_active?(email)
+    response = do_request(IS_SUPPRESSED_PATH.gsub('%email%', email), :get)
+    response == 'false'
   end
 
   def audience_search(query_string, raw = false)
